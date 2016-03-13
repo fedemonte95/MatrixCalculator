@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+ 
+<html lang="es">
+ 
+<head>
+	<title>TAREA PROGRAMADA 1</title>
+	<meta charset="utf-8" />
+	
+	<!-- Latest version Jquery -->
+	<script src="js/jquery-2.1.3.js"></script>
+	
+	<!-- Hoja Estilos Pagina Principal -->
+	<link rel="stylesheet" href="estilos.css" />
+	
+	<!-- Latest compiled and minified bootstrap'CSS -->
+	<link rel="stylesheet" href="css/bootstrap.min.css">
+
+	<!-- Optional bootstrap'theme -->
+	<link rel="stylesheet" href="css/bootstrap-theme.min.css">
+
+	<!-- Latest compiled and minified bootstrap -->
+	<script src="js/bootstrap.min.js"></script>
+	
+	<!-- Codigo fuente JavaScript Proyecto ISAAC CAMPOS -->
+	<script src="codigoJavaScript.js"></script>
+	
+</head>
+	
+<body>
+    <header class="height-50">
+        <h1>1 PROYECTO PROGRAMADO ÁLGEBRA LINEAL PARA COMPUTACIÓN</h1>
+    </header>
+    
+	<img id="background" class="blur"></img>
+	<section id="sec_principal">
+		<div class="ventana_principal opacity0">
+			<div class="cont_input">
+				<div class="inputs">
+                    <div class="row">
+                        <div class="col-md-4 col_tamanio">
+                            <button class="ocultar"
+                                onclick="
+                                     document
+                                     .querySelector('.col_tamanio')
+                                     .classList.toggle('oculto');"></button>
+                            <label id="titulo_selector_tamanio">Tamaño Matriz: 
+                                <select id="selector_tamanio">
+                                    <option value="A">A</option>
+                                    <option value="B">B</option>
+                                </select>
+                            </label>
+                            <div class="cont_matriz" ID="cont_selector_tamanio">
+                                <div class="DIV_6">
+                                    <table class="TABLE">
+                                        <tbody class="TBODY">
+                                            <tr>
+                                                <td entrada="11">
+                                                </td>
+                                                <td entrada="12">
+                                                </td>
+                                                <td entrada="13">
+                                                </td>
+                                                <td entrada="14">
+                                                </td>
+                                                <td entrada="15">
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td entrada="21">
+                                                </td>
+                                                <td entrada="22">
+                                                </td>
+                                                <td entrada="23">
+                                                </td>
+                                                <td entrada="24">
+                                                </td>
+                                                <td entrada="25">
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td entrada="31">
+                                                </td>
+                                                <td entrada="32">
+                                                </td>
+                                                <td entrada="33">
+                                                </td>
+                                                <td entrada="34">
+                                                </td>
+                                                <td entrada="35">
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td entrada="41">
+                                                </td>
+                                                <td entrada="42">
+                                                </td>
+                                                <td entrada="43">
+                                                </td>
+                                                <td entrada="44">
+                                                </td>
+                                                <td entrada="45">
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td entrada="51">
+                                                </td>
+                                                <td entrada="52">
+                                                </td>
+                                                <td entrada="53">
+                                                </td>
+                                                <td entrada="54">
+                                                </td>
+                                                <td entrada="55">
+                                                </td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-md-3">
+                            <div id="cont_matriz_A"></div>
+
+                        </div>
+
+                        <div class="col-md-2">
+                            <label>Operación</label><br><br><br>
+                            <select id="selector_operador">
+                                <option value="+">+</option>
+                                <option value="-">-</option>
+                                <option value="*">*</option>
+                                <option value="*n">* n</option>
+                                <option value="inv">inv(A)</option>
+                                <option value="det">det(A)</option>
+                            </select>
+                        </div>
+
+                        <div class="col-md-3">
+                            <div id="cont_matriz_B"></div>
+                        </div>
+                    </div>
+				</div>
+			</div>
+			
+			<div class="cont_calculo">
+				<label class="boton" style="margin: 0 15px 0 0;">¿Desea ver el procedimiento?<input type="checkbox" value="true" id="con_procedimiento"></label>
+                <button class="boton" onclick="get_data();">Realizar Cálculo</button>                
+			</div>
+            
+			<div class="cont_grafico">
+				<div class="campo_grafico"></div>
+			</div>
+		</div>
+	</section>
+    <footer  class="height-50">
+        <h1>2016 &copy;  Creado por</h1>
+    </footer>
+</body>
+
+</html>

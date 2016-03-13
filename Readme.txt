@@ -1,0 +1,2 @@
+Para poder visualizar el programa hecho en JavaScript, se debe abrir con algun navegador web (preferiblemente Google Chrome) el archivo index.html
+Para poder visualizar el programa hecho en JavaScript, se debe abrir con algun navegador web (preferiblemente Google Chrome) el archivo index.html
