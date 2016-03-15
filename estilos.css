@@ -528,6 +528,10 @@ button.ocultar:before {
     font: normal normal normal normal 11px / 0px Ubuntu, sans-serif;
     outline: rgb(51, 51, 51) none 0px;
     position: relative;
+    
+    -webkit-transition:All 0.2s ease;
+	-moz-transition:All 0.2s ease;
+	-o-transition:All 0.2s ease;
 }
 
 .TBODY td input {
@@ -540,12 +544,24 @@ button.ocultar:before {
     text-align: center;
 }
 
-.TBODY td.on{
+#cont_selector_tamanio .TBODY td.on{
     background-color: darkgray;
 }
 
-.selected td{
-    display: none;
+#cont_selector_tamanio td.on.blocked.on2 {
+    background-color: #773F3F;
+}
+#cont_selector_tamanio td.blocked.on2 {
+    background-color: #B18282;
+}
+
+#cont_selector_tamanio td{
+    color: transparent;
+}
+
+#cont_selector_tamanio td:hover,
+#cont_selector_tamanio td.clicked{
+    color: #000;
 }
 
 .selected td.on.blocked{
