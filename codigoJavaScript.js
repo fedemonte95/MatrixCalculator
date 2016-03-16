@@ -248,12 +248,13 @@ jQuery(document).ready(function($){
         var txt_entradas_invalidas = ""
         for (var i = 0; i < matriz.length; i++){
             for (var j = 0; j < matriz[0].length; j++){
-                if (matriz[i][j] == ""){
+                if (matriz[i][j] == "" || isNaN(matriz[i][j])){
                     txt_entradas_invalidas += " Entrada ("+(i+1)+", "+(j+1)+") \n";
                     $("#matriz_"+letra_matriz+" [name='"+i+""+j+"']").addClass("vacia");
                 }
             }   
         }
+        
         if (txt_entradas_invalidas != ""){
             alert("ERROR: la matriz "+letra_matriz+" debe ingresar valores en las siguientes entradas: \n"+txt_entradas_invalidas)
         }
