@@ -197,10 +197,8 @@ h1 {
 
 .campo_grafico{
 	width: 800px;
-	height: 500px;
-	margin: 15px 0px;
-	/*border: 2px solid #032137;*/
-	position: relative;
+    height: 100%;
+    position: relative;
 }
 
 h2 {
@@ -534,6 +532,10 @@ button.ocultar:before {
 	-o-transition:All 0.2s ease;
 }
 
+.TBODY input.vacia {
+    border-color: rgba(245, 0, 0, 0.53);
+}
+
 .TBODY td input {
     position: absolute;
     left: 0;
@@ -574,4 +576,66 @@ button.ocultar:before {
 
 .selected tr.on{
     display: table-row;
+}
+
+.owl-carousel .owl-stage-outer {
+    height: 100%;
+    padding-bottom: 40px;
+}
+
+.owl-carousel .owl-controls {
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+}
+
+.owl-carousel .owl-nav {
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    height: 40px;
+}
+
+.owl-carousel .owl-prev {
+    float: left;
+    background: #101D11 !important;
+}
+
+.owl-carousel .owl-next {
+    float: right;
+    background: #101D11 !important;
+}
+
+.owl-carousel .owl-dot.active span {
+    background: #101D11 !important;
+}
+
+.owl-carousel .owl-dot span {
+    border: 2px solid #0F1C10 !important;
+    height: 15px !important;
+    width: 15px !important;
+}
+
+.owl-carousel .owl-controls {
+    overflow: visible;
+}
+
+.owl-carousel .owl-controls .owl-nav > div {
+    -webkit-border-radius: 50% !important;
+    -moz-border-radius: 50% !important;
+    border-radius: 50% !important;
+    height: 30px;
+    width: 30px;
+}
+
+.owl-carousel .owl-stage {
+    height: 100%;
+}
+
+.owl-carousel .owl-item {
+    display: flex;
+    align-items: center;
+    align-content: center;
+    justify-content: center;
+    min-height: 100% !important;
 }
