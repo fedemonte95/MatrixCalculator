@@ -46,94 +46,96 @@
 			<div class="cont_input">
 				<div class="inputs">
                     <div class="row">
-                        <div class="col-md-4 col_tamanio">
-                            <button class="ocultar"
-                                onclick="
-                                     document
-                                     .querySelector('.col_tamanio')
-                                     .classList.toggle('oculto');"></button>
-                            <label id="titulo_selector_tamanio">Tamaño Matriz: 
-                                <select id="selector_tamanio">
-                                    <option value="A">A</option>
-                                    <option value="B">B</option>
-                                </select>
-                            </label>
-                            <div class="cont_matriz" ID="cont_selector_tamanio">
-                                <div class="DIV_6">
-                                    <table class="TABLE">
-                                        <tbody class="TBODY">
-                                            <tr>
-                                                <td entrada="11">1x1
-                                                </td>
-                                                <td entrada="12">1x2
-                                                </td>
-                                                <td entrada="13">1x3
-                                                </td>
-                                                <td entrada="14">1x4
-                                                </td>
-                                                <td entrada="15">1x5
-                                                </td>
-                                            </tr>
-                                            <tr>
-                                                <td entrada="21">2x1
-                                                </td>
-                                                <td entrada="22">2x2
-                                                </td>
-                                                <td entrada="23">2x3
-                                                </td>
-                                                <td entrada="24">2x4
-                                                </td>
-                                                <td entrada="25">2x5
-                                                </td>
-                                            </tr>
-                                            <tr>
-                                                <td entrada="31">3x1
-                                                </td>
-                                                <td entrada="32">3x2
-                                                </td>
-                                                <td entrada="33">3x3
-                                                </td>
-                                                <td entrada="34">3x4
-                                                </td>
-                                                <td entrada="35">3x5
-                                                </td>
-                                            </tr>
-                                            <tr>
-                                                <td entrada="41">4x1
-                                                </td>
-                                                <td entrada="42">4x2
-                                                </td>
-                                                <td entrada="43">4x3
-                                                </td>
-                                                <td entrada="44">4x4
-                                                </td>
-                                                <td entrada="45">4x5
-                                                </td>
-                                            </tr>
-                                            <tr>
-                                                <td entrada="51">5x1
-                                                </td>
-                                                <td entrada="52">5x2
-                                                </td>
-                                                <td entrada="53">5x3
-                                                </td>
-                                                <td entrada="54">5x4
-                                                </td>
-                                                <td entrada="55">5x5
-                                                </td>
-                                            </tr>
-                                        </tbody>
-                                    </table>
+                        <div class="col-xs-4 col-sm-4 col-md-4 col_tamanio col_matriz">
+                            <div>
+                                <button class="ocultar"
+                                    onclick="
+                                         document
+                                         .querySelector('.col_tamanio')
+                                         .classList.toggle('oculto');"></button>
+                                <label id="titulo_selector_tamanio">Tamaño Matriz: 
+                                    <select id="selector_tamanio">
+                                        <option value="A">A</option>
+                                        <option value="B">B</option>
+                                    </select>
+                                </label>
+                                <div class="cont_matriz" ID="cont_selector_tamanio">
+                                    <div class="DIV_6">
+                                        <table class="TABLE">
+                                            <tbody class="TBODY">
+                                                <tr>
+                                                    <td entrada="11">1x1
+                                                    </td>
+                                                    <td entrada="12">1x2
+                                                    </td>
+                                                    <td entrada="13">1x3
+                                                    </td>
+                                                    <td entrada="14">1x4
+                                                    </td>
+                                                    <td entrada="15">1x5
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td entrada="21">2x1
+                                                    </td>
+                                                    <td entrada="22">2x2
+                                                    </td>
+                                                    <td entrada="23">2x3
+                                                    </td>
+                                                    <td entrada="24">2x4
+                                                    </td>
+                                                    <td entrada="25">2x5
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td entrada="31">3x1
+                                                    </td>
+                                                    <td entrada="32">3x2
+                                                    </td>
+                                                    <td entrada="33">3x3
+                                                    </td>
+                                                    <td entrada="34">3x4
+                                                    </td>
+                                                    <td entrada="35">3x5
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td entrada="41">4x1
+                                                    </td>
+                                                    <td entrada="42">4x2
+                                                    </td>
+                                                    <td entrada="43">4x3
+                                                    </td>
+                                                    <td entrada="44">4x4
+                                                    </td>
+                                                    <td entrada="45">4x5
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td entrada="51">5x1
+                                                    </td>
+                                                    <td entrada="52">5x2
+                                                    </td>
+                                                    <td entrada="53">5x3
+                                                    </td>
+                                                    <td entrada="54">5x4
+                                                    </td>
+                                                    <td entrada="55">5x5
+                                                    </td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                    </div>
                                 </div>
                             </div>
                         </div>
 
-                        <div class="col-md-3">
+                        <div class="col-xs-3 col-sm-3 col-md-3 col_matriz">
                             <div id="cont_matriz_A"></div>
 
                         </div>
 
-                        <div class="col-md-2">
+                        <div class="col-xs-2 col-sm-2 col-md-2">
                             <label>Operación</label><br><br><br>
                             <select id="selector_operacion">
                                 <option value="+">+</option>
@@ -145,7 +147,7 @@
                             </select>
                         </div>
 
-                        <div class="col-md-3">
+                        <div class="col-xs-3 col-sm-3 col-md-3 col_matriz">
                             <div id="cont_matriz_B"></div>
                         </div>
                     </div>

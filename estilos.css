@@ -444,16 +444,33 @@ button.ocultar:before {
 .col_tamanio.oculto button.ocultar:before {
     content: ">";
 }
+
+.col_matriz {
+    height: 195px;
+    padding-top: 25px;
+}
+
+.col_matriz > div {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100%;
+}
+
+.col_matriz label {
+    position: absolute;
+    top: 0;
+}
 /****** Tablas de selección ********/
 
 .cont_matriz{
     color: rgb(51, 51, 51);
     margin: 0 auto;
     cursor: pointer;
-    height: 145px;
+    height: auto;
     position: relative;
     text-align: center;
-    width: 165px;
+    width: auto;
     z-index: 100;
     perspective-origin: 111.5px 119.5px;
     transform-origin: 111.5px 119.5px;
@@ -470,9 +487,9 @@ button.ocultar:before {
     color: rgb(51, 51, 51);
     cursor: pointer;
     float: left;
-    height: 100%;
+    height: auto;
     text-align: center;
-    width: 100%;
+    width: auto;
     perspective-origin: 105.5px 105.5px;
     transform-origin: 105.5px 105.5px;
     border: 0px none rgb(51, 51, 51);
@@ -486,39 +503,39 @@ button.ocultar:before {
     border-collapse: collapse;
     color: rgb(51, 51, 51);
     cursor: pointer;
-    height: 100%;
+    height: auto;
     max-width: 100%;
     text-align: center;
-    width: 100%;
+    width: auto;
     perspective-origin: 105.5px 105.5px;
     transform-origin: 105.5px 105.5px;
     border-spacing: 0px 0px;
     font: normal normal normal normal 11px / 0px Ubuntu, sans-serif;
     outline: rgb(51, 51, 51) none 0px;
+    display: block
 }/*.TABLE*/
 
 .TBODY {
     border-collapse: collapse;
     color: rgb(51, 51, 51);
     cursor: pointer;
-    height: 210px;
+    height: auto;
     text-align: center;
-    width: 210px;
+    width: auto;
     perspective-origin: 105px 105px;
     transform-origin: 105px 105px;
     border: 0px none rgb(128, 128, 128);
     font: normal normal normal normal 11px / 0px Ubuntu, sans-serif;
     outline: rgb(51, 51, 51) none 0px;
+    display: block;
 }
 
 .TBODY td{
     border-collapse: collapse;
     color: rgb(51, 51, 51);
     cursor: pointer;
-    height: 20px;
     text-align: center;
     vertical-align: middle;
-    width: 20px;
     perspective-origin: 10.5px 10.5px;
     transform-origin: 10.5px 10.5px;
     background: rgb(255, 255, 255) none repeat scroll 0% 0% / auto padding-box border-box;
@@ -530,6 +547,15 @@ button.ocultar:before {
     -webkit-transition:All 0.2s ease;
 	-moz-transition:All 0.2s ease;
 	-o-transition:All 0.2s ease;
+	
+	float: left;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    
+    height: 30px;
+    width: 30px;
+    
 }
 
 .TBODY input.vacia {
@@ -587,6 +613,7 @@ button.ocultar:before {
     position: absolute;
     bottom: 0;
     width: 100%;
+    z-index: -1;
 }
 
 .owl-carousel .owl-nav {
