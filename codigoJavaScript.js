@@ -123,7 +123,7 @@ jQuery(document).ready(function($){
                             for(var i=0; i < M; i++){
                                 matriz_HTML += '<tr>';
                                 for(var j=0; j < N; j++){
-                                    matriz_HTML += '<td class="wow zoomIn" data-wow-delay="'+cont_wow+'s">'+matriz[i][j]+'</td>';
+                                    matriz_HTML += '<td><span class="wow zoomIn" data-wow-delay="'+cont_wow+'s">'+matriz[i][j]+'</span></td>';
                                     cont_wow++;
                                 }
                                 matriz_HTML += '</tr>';
@@ -133,6 +133,57 @@ jQuery(document).ready(function($){
                     </table>\
                 </div>\
             </div>';
+        return matriz_HTML;
+    }
+    
+    function generarMatrizHTMLProducto(matriz_A, matriz_B){
+     
+        var matriz_HTML =
+            '<div class="cont_matriz">\
+                <div class="DIV_6">\
+                    <table class="TABLE">\
+                        <tbody class="TBODY">';
+                            var cont_wow = 0;
+                            for(var i=0; i < matriz_A.length; i++){
+                                matriz_HTML += '<tr class="wow zoomIn" data-wow-delay="'+((cont_wow++)*matriz_B[0].length)+'s" data-wow-iteration="'+matriz_B[0].length+'">';
+                                for(var j=0; j < matriz_A[0].length; j++){
+                                    matriz_HTML += '<td><span>'+matriz_A[i][j]+'</span></td>';
+                                }
+                                matriz_HTML += '</tr>';
+                            }
+                            matriz_HTML +=
+                        '</tbody>\
+                    </table>\
+                </div>\
+            </div>\
+            <span>*</span>\
+            <div class="cont_matriz" id="cont_result_B">\
+                <div class="DIV_6">\
+                    <table class="TABLE">\
+                        <tbody class="TBODY">';
+                            var cont_wow_B = 0;
+                            for(var i=0; i < matriz_B.length; i++){
+                                matriz_HTML += '<tr>';
+                                for(var j=0; j < matriz_B[0].length; j++){
+                                    matriz_HTML += '<td class="wow zoomIn" data-wow-delay="'+j+'s">'+matriz_B[i][j]+'</td>';
+                                }
+                                matriz_HTML += '</tr>';
+                            }
+                            matriz_HTML +=
+                        '</tbody>\
+                    </table>\
+                </div>\
+            </div>\
+            <script>\
+                var animacion_matriz_B = setInterval(function(){\
+                    jQuery("#cont_result_B").html(jQuery("#cont_result_B").html());\
+                    iteraciones = iteraciones == "" ? 0 : iteraciones+1;\
+                    if(iteraciones == '+matriz_B[0].length+'){\
+                        clearInterval(animacion_matriz_B);\
+                    }\
+                }, ' + 1000*matriz_B[0].length + ');' +
+            '</script>';
+            
         return matriz_HTML;
     }
     
@@ -175,27 +226,28 @@ jQuery(document).ready(function($){
             +"<span>"+operacion+"</span>"
             +generarMatrizHTML(matriz_B)
             +"<span>=</span>"
-            +generarMatrizHTML(matriz_resultado)
+            +generarMatrizHTML(matriz_resultado.resultado)
+            +"<div class='pasos'>"+matriz_resultado.pasos+"</div>"
         );
     }
     
     function renderizarProductoN(matriz_A, operacion, factor, matriz_resultado){
         $(".campo_grafico .owl-item.active").html(
             generarMatrizHTML(matriz_A)
-            +"<span>"+operacion+"</span>"
-            +"<span>"+factor+"</span>"
-            +"<span>=</span>"
-            +generarMatrizHTML(matriz_resultado)
+            + "<span>*</span>"
+            + "<span style='margin: 0 auto;'>"+factor+"</span>"
+            + "<span>=</span>"
+            + generarMatrizHTML(matriz_resultado.resultado)
+            + "<div class='pasos'>"+matriz_resultado.pasos+"</div>"
         );
     }
     
     function renderizarProductoMatrices(matriz_A, operacion, matriz_B, matriz_resultado){
         $(".campo_grafico .owl-item.active").html(
-            generarMatrizHTML(matriz_A)
-            +"<span>"+operacion+"</span>"
-            +generarMatrizHTML(matriz_B)
-            +"<span>=</span>"
-            +generarMatrizHTML(matriz_resultado)
+            generarMatrizHTMLProducto(matriz_A, matriz_B)
+            + "<span>=</span>"
+            + generarMatrizHTML(matriz_resultado.resultado)
+            + "<div class='pasos'>"+matriz_resultado.pasos+"</div>"
         );
     }
     
@@ -214,14 +266,27 @@ jQuery(document).ready(function($){
     
     function sumaMatrices(matriz_A, matriz_B, modo){
         var matriz_resultado = crearArrayBidimensionalVacio(matriz_A.length, matriz_A[0].length);
+        var pasos = Array(matriz_A.length * matriz_A[0].length);
+        var cont_pasos = 0;
         for (var i = 0; i < matriz_A.length; i++){
             for (var j = 0; j < matriz_A[0].length; j++){
                 matriz_resultado[i][j] = matriz_A[i][j] + (modo == "resta" ? -matriz_B[i][j] : matriz_B[i][j]);
+                pasos += 
+                    '<div class="wow zoomIn" data-wow-delay="'+cont_pasos+'s">'
+                        + matriz_A[i][j]
+                        + (modo == "resta" ? " - " : " + ")
+                        + matriz_B[i][j]
+                        + " = "
+                        + matriz_resultado[i][j]
+                    +'</div>';
+                cont_pasos++;
             }   
         }
         console.log("DEBUG #RESULTADO SUMA");
         console.log(matriz_resultado);
-        return matriz_resultado;
+        console.log("DEBUG #RESULTADO SUMA pasos");
+        console.log(pasos);
+        return {resultado: matriz_resultado, pasos: pasos};
     }
     
     function productoMatrices(matriz_A, matriz_B){
@@ -230,9 +295,15 @@ jQuery(document).ready(function($){
         console.log("DEBUG #RESULTADO productoMatrices matriz_B");
         console.log(matriz_B);
         var matriz_resultado = crearArrayBidimensionalVacio(matriz_A.length, matriz_B[0].length); //Se crea una matriz del tamaño de las columnas de A y filas de B
+        var pasos = "";
+        var cont_pasos = 0;
         for (var i = 0; i < matriz_A.length; i++){
             for (var j = 0; j < matriz_B[0].length; j++){
                 var resultado_temp = 0;
+                
+                pasos += 
+                    '<div class="wow zoomIn" data-wow-delay="'+(cont_pasos++)+'s">';
+                    
                 for (var k = 0; k < matriz_B.length; k++){
                     resultado_temp += matriz_A[i][k] * matriz_B[k][j];
                     // console.log("DEBUG #RESULTADOs matriz_A[i][k]");
@@ -242,13 +313,24 @@ jQuery(document).ready(function($){
                     // // matriz_resultado[i][j] += matriz_A[i][k] * matriz_B[k][j];
                     // console.log("DEBUG #RESULTADOs matriz_resultado");
                     // console.log(matriz_resultado);
+                    pasos += 
+                        matriz_A[i][k]
+                        + " * "
+                        + matriz_B[k][j]
+                        + (k+1 < matriz_B.length ? " + " : "" );
+                        
                 }  
                 matriz_resultado[i][j] = resultado_temp;
+                
+                pasos += 
+                        " = "
+                        + matriz_resultado[i][j]
+                    +'</div>';
             }   
         }
         console.log("DEBUG #RESULTADO producto");
         console.log(matriz_resultado);
-        return matriz_resultado;
+        return {resultado: matriz_resultado, pasos: pasos};
     }
     
     function productoN(matriz_A, factor){
@@ -259,7 +341,7 @@ jQuery(document).ready(function($){
 
         for (var i = 0; i < matriz_A.length; i++){
             for (var j = 0; j < matriz_A[0].length; j++){
-                matriz_resultado[i][j] = matriz_resultado[i][j] * factor;
+                matriz_resultado[i][j] =  matriz_A[i][j] * factor;
             }   
         }
         console.log("DEBUG #RESULTADO producto n");
@@ -328,7 +410,7 @@ jQuery(document).ready(function($){
         var txt_entradas_invalidas = ""
         for (var i = 0; i < matriz.length; i++){
             for (var j = 0; j < matriz[0].length; j++){
-                if (isNaN(matriz[i][j]){
+                if ( isNaN(matriz[i][j]) ){
                     txt_entradas_invalidas += " Entrada ("+(i+1)+", "+(j+1)+") \n";
                     $("#matriz_"+letra_matriz+" [name='"+i+""+j+"']").addClass("vacia");
                 }
@@ -402,4 +484,13 @@ jQuery(document).ready(function($){
     //RENDER DE LAS ANIMACIONES WOW
     new WOW().init();
 
+    //Code: https://github.com/daneden/animate.css
+    $.fn.extend({
+        animateCss: function (animationName) {
+            var animationEnd = 'webkitAnimationEnd mozAnimationEnd MSAnimationEnd oanimationend animationend';
+            $(this).addClass('animated ' + animationName).one(animationEnd, function() {
+                $(this).removeClass('animated ' + animationName);
+            });
+        }
+    });
 });
