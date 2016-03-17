@@ -126,3 +126,6 @@ def determinante(matriz):
 	    return sum(term_list)
 	else:
 	    return (X[0][0]*X[1][1] - X[0][1]*X[1][0])
+
+
+determinante([[1,2],[2,3]])

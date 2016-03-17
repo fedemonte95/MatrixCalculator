@@ -32,13 +32,7 @@ m2 = [[3,1,5],[2,-1,4],[1,0,3]]    # matriz 3x3
 ##m2 = [[2],[-4],[6]]          # matriz 3x1
 
 def multiplicacionMatriz(m1,m2):
-    # validación de producto de matrices
-    fila_m1 = len(m1)
-    columna_m1 = len(m1[0])
-    fila_m2 = len(m2)
-    columna_m2 = len (m2[0])
-
-    if columna_m1 != fila_m2:
+     if columna_m1 != fila_m2:
         print ('número de columnas de la Matriz 1 no es igual al numero de filas de la matriz 2')
         return
 

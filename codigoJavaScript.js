@@ -76,7 +76,7 @@ jQuery(document).ready(function($){
     });
     
     function mostrarMultiplicacionN(){
-        $("#cont_matriz_B").html('<label>Numero a multiplicar</label><br><br><input id="factor">');
+        $("#cont_matriz_B").html('<label>Numero a multiplicar</label><br><br><input type="number" id="factor">');
     }
     
     function mostrarSelectInv(){
@@ -152,6 +152,24 @@ jQuery(document).ready(function($){
         if(la_operacion_es_valida){
             matriz_resultado = operar(matriz_A, operacion, matriz_B);
         }
+        
+        renderizarResultado(matriz_A, operacion, matriz_B, matriz_resultado);
+        
+
+    };
+    
+    function renderizarResultado(matriz_A, operacion, matriz_B, matriz_resultado){
+        switch(operacion){
+            case "+" : renderizarSumaMatrices(matriz_A, operacion, matriz_B, matriz_resultado); break;
+            case "-" : renderizarSumaMatrices(matriz_A, operacion, matriz_B, matriz_resultado); break;
+            case "*" : renderizarProductoMatrices(matriz_A, operacion, matriz_B, matriz_resultado); break;
+            case "*n" : renderizarProductoN(matriz_A, operacion, parseFloat($("#factor").val()), matriz_resultado); break;
+            case "inv" : renderizarOperacionInversa(matriz_A, operacion, matriz_resultado); break;
+            case "det" : renderizarOperacionDeterminante(matriz_A, operacion, matriz_resultado); break;
+        }
+    }
+
+    function renderizarSumaMatrices(matriz_A, operacion, matriz_B, matriz_resultado){
         $(".campo_grafico .owl-item.active").html(
             generarMatrizHTML(matriz_A)
             +"<span>"+operacion+"</span>"
@@ -159,8 +177,27 @@ jQuery(document).ready(function($){
             +"<span>=</span>"
             +generarMatrizHTML(matriz_resultado)
         );
-
-    };
+    }
+    
+    function renderizarProductoN(matriz_A, operacion, factor, matriz_resultado){
+        $(".campo_grafico .owl-item.active").html(
+            generarMatrizHTML(matriz_A)
+            +"<span>"+operacion+"</span>"
+            +"<span>"+factor+"</span>"
+            +"<span>=</span>"
+            +generarMatrizHTML(matriz_resultado)
+        );
+    }
+    
+    function renderizarProductoMatrices(matriz_A, operacion, matriz_B, matriz_resultado){
+        $(".campo_grafico .owl-item.active").html(
+            generarMatrizHTML(matriz_A)
+            +"<span>"+operacion+"</span>"
+            +generarMatrizHTML(matriz_B)
+            +"<span>=</span>"
+            +generarMatrizHTML(matriz_resultado)
+        );
+    }
     
     function operar(matriz_A, operacion, matriz_B){
         var matriz_resultado;
@@ -168,7 +205,7 @@ jQuery(document).ready(function($){
             case "+" : matriz_resultado = sumaMatrices(matriz_A, matriz_B); break;
             case "-" : matriz_resultado = sumaMatrices(matriz_A, matriz_B, "resta"); break;
             case "*" : matriz_resultado = productoMatrices(matriz_A, matriz_B); break;
-            case "*n" : matriz_resultado = productoN(matriz_A); break;
+            case "*n" : matriz_resultado = productoN(matriz_A, parseFloat($("#factor").val())); break;
             case "inv" : matriz_resultado = operacionInversa(matriz_A); break;
             case "det" : matriz_resultado = operacionDeterminante(matriz_A); break;
         }
@@ -179,14 +216,53 @@ jQuery(document).ready(function($){
         var matriz_resultado = crearArrayBidimensionalVacio(matriz_A.length, matriz_A[0].length);
         for (var i = 0; i < matriz_A.length; i++){
             for (var j = 0; j < matriz_A[0].length; j++){
-                if (modo == "resta"){
-                    matriz_resultado[i][j] = (matriz_A[i][j]-matriz_B[i][j]);
-                } else {
-                    matriz_resultado[i][j] = (matriz_A[i][j]+matriz_B[i][j]);
-                }
+                matriz_resultado[i][j] = matriz_A[i][j] + (modo == "resta" ? -matriz_B[i][j] : matriz_B[i][j]);
             }   
         }
         console.log("DEBUG #RESULTADO SUMA");
+        console.log(matriz_resultado);
+        return matriz_resultado;
+    }
+    
+    function productoMatrices(matriz_A, matriz_B){
+        console.log("DEBUG #RESULTADO productoMatrices matriz_A");
+        console.log(matriz_A);
+        console.log("DEBUG #RESULTADO productoMatrices matriz_B");
+        console.log(matriz_B);
+        var matriz_resultado = crearArrayBidimensionalVacio(matriz_A.length, matriz_B[0].length); //Se crea una matriz del tamaño de las columnas de A y filas de B
+        for (var i = 0; i < matriz_A.length; i++){
+            for (var j = 0; j < matriz_B[0].length; j++){
+                var resultado_temp = 0;
+                for (var k = 0; k < matriz_B.length; k++){
+                    resultado_temp += matriz_A[i][k] * matriz_B[k][j];
+                    // console.log("DEBUG #RESULTADOs matriz_A[i][k]");
+                    // console.log(matriz_A[i][k]);
+                    // console.log("DEBUG #RESULTADOs matriz_B[k][j]");
+                    // console.log(matriz_B[k][j]);
+                    // // matriz_resultado[i][j] += matriz_A[i][k] * matriz_B[k][j];
+                    // console.log("DEBUG #RESULTADOs matriz_resultado");
+                    // console.log(matriz_resultado);
+                }  
+                matriz_resultado[i][j] = resultado_temp;
+            }   
+        }
+        console.log("DEBUG #RESULTADO producto");
+        console.log(matriz_resultado);
+        return matriz_resultado;
+    }
+    
+    function productoN(matriz_A, factor){
+        console.log("DEBUG #RESULTADO producto, factor:");
+        console.log(factor);
+        
+        var matriz_resultado = crearArrayBidimensionalVacio(matriz_A.length, matriz_A[0].length); //Se crea una matriz del tamaño de las columnas de A y filas de B
+
+        for (var i = 0; i < matriz_A.length; i++){
+            for (var j = 0; j < matriz_A[0].length; j++){
+                matriz_resultado[i][j] = matriz_resultado[i][j] * factor;
+            }   
+        }
+        console.log("DEBUG #RESULTADO producto n");
         console.log(matriz_resultado);
         return matriz_resultado;
     }
@@ -202,17 +278,21 @@ jQuery(document).ready(function($){
     
     // Funcion para obtener los datos de las tablas HTML, y crear un array de JS
     function getMatriz(letra){ 
+        var matriz = [];
+        if($("#cont_matriz_"+letra+" table").length > 0 ){
         var cant_filas = $("#cont_matriz_"+letra+" tr").length;
         var cant_columnas = $("#cont_matriz_"+letra+" tr:first td").length;
-        var matriz = crearArrayBidimensionalVacio(cant_filas, cant_columnas);
+        matriz = crearArrayBidimensionalVacio(cant_filas, cant_columnas);
         
         $("#cont_matriz_"+letra+" input").each(function(){
             var entrada = $(this).attr("name");
             var i = entrada.charAt(0);
             var j = entrada.charAt(1);
             matriz[i][j] = parseFloat($(this).val());
-        });   
+        });  
+        }
         return matriz;
+        
     }
     
     function validarOperacionesMatrices(matriz_A, operacion, matriz_B){
@@ -248,7 +328,7 @@ jQuery(document).ready(function($){
         var txt_entradas_invalidas = ""
         for (var i = 0; i < matriz.length; i++){
             for (var j = 0; j < matriz[0].length; j++){
-                if (matriz[i][j] == "" || isNaN(matriz[i][j])){
+                if (isNaN(matriz[i][j]){
                     txt_entradas_invalidas += " Entrada ("+(i+1)+", "+(j+1)+") \n";
                     $("#matriz_"+letra_matriz+" [name='"+i+""+j+"']").addClass("vacia");
                 }
@@ -290,6 +370,10 @@ jQuery(document).ready(function($){
             alert("ERROR: La matriz A debe ser cuadrada para realizar esta operación")
         }
         return cumplen_tamanios_validos && campos_A_validos;
+    }
+    
+    function validarOperacionDeterminante(matriz_A){
+        return validarCamposMatriz("A", matriz_A);
     }
     
     //SE INICIAN LAS MATRICES CON TAMAÑO 5x5
