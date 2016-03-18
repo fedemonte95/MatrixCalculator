@@ -568,6 +568,19 @@ button.ocultar:before {
     justify-content: center;
 }
 
+.TBODY td span{
+    -webkit-transition:All 0.5s ease;
+	-moz-transition:All 0.5s ease;
+	-o-transition:All 0.5s ease;
+}
+
+.TBODY td span.animated, .TBODY tr.animated span, .TBODY td.animated span{
+    border: 1px solid red;
+    box-shadow: inset 0px 0px 5px 1px red;
+    color: red;
+}
+
+
 .TBODY input.vacia {
     border-color: rgba(245, 0, 0, 0.53);
 }
